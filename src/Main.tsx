@@ -25,6 +25,30 @@ const Feed = () => {
     </View>
   );
 };
+const Add = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Add</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
+const Search = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Search</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
+const Later = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Later</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
 
 const Settings = () => {
   return (
@@ -49,7 +73,10 @@ const Home = () => {
           },
         }}
       />
+      <Tab.Screen name="Later" component={Later} />
       <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Add" component={Add} />
+      <Tab.Screen name="Search" component={Search} />
     </Tab.Navigator>
   );
 };
