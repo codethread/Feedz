@@ -1,12 +1,83 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import {
+  DrawerActions,
+  NavigationContainer,
+  useNavigation,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerContentComponentProps,
+} from '@react-navigation/drawer';
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const SettingsDrawer = createDrawerNavigator();
+
+const Feed = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Feed</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
+
+const Settings = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Settings</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
+
+const Home = () => {
+  const nav = useNavigation();
+  return (
+    <Tab.Navigator initialRouteName="Feed">
+      <Tab.Screen
+        name="Settings"
+        component={Feed}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            nav.dispatch(DrawerActions.openDrawer());
+          },
+        }}
+      />
+      <Tab.Screen name="Feed" component={Feed} />
+    </Tab.Navigator>
+  );
+};
+
+const Drawer = (props: DrawerContentComponentProps) => {
+  return (
+    <DrawerContentScrollView {...props}>
+      <View>
+        <Text>hello</Text>
+      </View>
+    </DrawerContentScrollView>
+  );
+};
 
 export function Main() {
   return (
-    <View style={styles.container}>
-      <Text>foo main!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <SettingsDrawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          drawerType: 'front',
+          headerShown: false,
+        }}
+        drawerContent={Drawer}
+      >
+        <SettingsDrawer.Screen name="Home" component={Home} />
+      </SettingsDrawer.Navigator>
+    </NavigationContainer>
   );
 }
 
