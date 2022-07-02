@@ -12,6 +12,13 @@ import {
   DrawerContentScrollView,
   DrawerContentComponentProps,
 } from '@react-navigation/drawer';
+import {
+  BookmarkIcon,
+  FeedIcon,
+  MenuIcon,
+  PlusIcon,
+  SearchIcon,
+} from './icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,21 +57,22 @@ const Later = () => {
   );
 };
 
-const Settings = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Settings</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-};
-
 const Home = () => {
   const nav = useNavigation();
   return (
-    <Tab.Navigator initialRouteName="Feed">
+    <Tab.Navigator
+      initialRouteName="Feed"
+      screenOptions={{
+        tabBarShowLabel: false,
+      }}
+    >
       <Tab.Screen
         name="Settings"
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MenuIcon color={color} size={size} />
+          ),
+        }}
         component={Feed}
         listeners={{
           tabPress: (e) => {
@@ -73,10 +81,42 @@ const Home = () => {
           },
         }}
       />
-      <Tab.Screen name="Later" component={Later} />
-      <Tab.Screen name="Feed" component={Feed} />
-      <Tab.Screen name="Add" component={Add} />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen
+        name="Later"
+        component={Later}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <BookmarkIcon color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Feed"
+        component={Feed}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <FeedIcon color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Add"
+        component={Add}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <PlusIcon color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <SearchIcon color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
