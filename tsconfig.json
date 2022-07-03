@@ -18,7 +18,8 @@
     "paths": {
       "@screens": ["src/screens"],
       "@icons": ["src/icons"],
-      "@styles": ["src/styles"]
+      "@styles": ["src/styles"],
+      "@hooks": ["src/hooks"]
     }
   }
 }

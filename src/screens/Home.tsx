@@ -5,8 +5,10 @@ import { Feed } from './Feed';
 import { Later } from './Later';
 import { Add } from './Add';
 import { Search } from './Search';
+import { colors } from '@styles';
 
 const Tab = createBottomTabNavigator();
+
 export const Home = () => {
   const nav = useNavigation();
   return (
@@ -14,14 +16,15 @@ export const Home = () => {
       initialRouteName="Feed"
       screenOptions={{
         tabBarShowLabel: false,
+        tabBarActiveTintColor: colors.primary,
       }}
     >
       <Tab.Screen
         name="Settings"
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <MenuIcon color={color} size={size} />
-          ),
+          tabBarIcon: ({ size, color }) => {
+            return <MenuIcon color={color} size={size} />;
+          },
         }}
         component={Feed}
         listeners={{
@@ -35,9 +38,10 @@ export const Home = () => {
         name="Later"
         component={Later}
         options={{
-          tabBarIcon: ({ size, color }) => (
-            <BookmarkIcon color={color} size={size} />
-          ),
+          tabBarIcon: ({ size, color }) => {
+            console.log({ color });
+            return <BookmarkIcon color={color} size={size} />;
+          },
         }}
       />
       <Tab.Screen
