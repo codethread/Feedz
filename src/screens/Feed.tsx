@@ -103,6 +103,7 @@ const formatData = (rss: RSS): Data => {
 // section list by folder
 export const Feed = () => {
   const { data: rss, loading } = useRSS();
+  debugger;
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
